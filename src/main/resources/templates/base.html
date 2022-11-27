@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:fragment="Layout(content)">
+<head>
+
+<!-- Author:- http://github.com/mharisraza/ -->
+
+<!-- My CSS -->
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="stylesheet" type="text/css" href="/css/global.css">
+<!-- ============= -->
+
+<!-- FrameWork CSS(s) -->
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="/css/fontawesome.css">
+<!-- =========== -->
+
+<!-- My JS(s) -->
+<script type="text/javascript" src="/js/script.js"></script>
+<script type="text/javascript" src="/js/errors.js"></script>
+<!-- ============ -->
+
+<!-- FrameWork JS(s) -->
+<script type="text/javascript" src="/js/sweet-alert.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap.bundle.js"></script>
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/popper.js"></script>
+<!-- -->
+
+
+<meta charset="UTF-8" />
+<title>[(${title})]</title>
+</head>
+<body>
+
+	<div th:replace="${content}"></div>
+
+</body>
+</html>
