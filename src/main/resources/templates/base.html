@@ -5,14 +5,27 @@
 
 <!-- Author:- http://github.com/mharisraza/ -->
 
+<!-- JQuery	 -->
+<script type="text/javascript" src="/js/jquery.js"></script>
+<!-- =========== -->
+
+<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+
+<!-- WebLogo -->
+ <link rel="icon" type="image/x-icon" href="/images/logo.png">
+<!-- ======= -->
+
 <!-- My CSS -->
 <link rel="stylesheet" type="text/css" href="/css/main.css">
 <link rel="stylesheet" type="text/css" href="/css/global.css">
 <!-- ============= -->
 
 <!-- FrameWork CSS(s) -->
-<link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
-<link rel="stylesheet" type="text/css" href="/css/fontawesome.css">
+<link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" >
+<link href="/css/font.css?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <!-- =========== -->
 
 <!-- My JS(s) -->
@@ -20,21 +33,52 @@
 <script type="text/javascript" src="/js/errors.js"></script>
 <!-- ============ -->
 
-<!-- FrameWork JS(s) -->
-<script type="text/javascript" src="/js/sweet-alert.js"></script>
-<script type="text/javascript" src="/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/js/bootstrap.bundle.js"></script>
-<script type="text/javascript" src="/js/jquery.js"></script>
-<script type="text/javascript" src="/js/popper.js"></script>
-<!-- -->
-
 
 <meta charset="UTF-8" />
 <title>[(${title})]</title>
 </head>
 <body>
 
+	<nav class="navbar navbar-expand-lg navbar-dark primary-background">
+	
+		<div class="container-fluid">
+			<a class="navbar-brand fw-bold fs-35" href="/home"><img class="w-65" src="/images/logo.png">STOREWALA</a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarText"
+				aria-controls="navbarText" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			
+			<div class="collapse navbar-collapse" id="navbarText">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item"><a class="nav-link active"
+						aria-current="page" href="#">Home</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">About</a>
+					</li>
+					<li class="nav-item"><a class="nav-link" href="http://github.com/mharisraza	">Github@mharisraza</a>
+					</li>
+				</ul>
+				
+				<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+					<li class="nav-item btn btn-outline-warning me-2"><i class="fa-solid fa-cart-shopping"></i> Cart <span class="badge bg-dark text-white">1</span></li>
+					<li class="nav-item btn btn-outline-warning">Sign Up</li>
+					
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+
+
 	<div th:replace="${content}"></div>
+
+<!-- FrameWork JS(s) -->
+
+<script src="/js/popper.js" ></script>
+<script src="/js/sweet-alert.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<!-- -->
 
 </body>
 </html>

@@ -1,1 +1,59 @@
 /* Author:- http://github.com/mharisraza/ */
+
+body {
+  font-family: "Poppins", sans-serif!important;
+}
+
+.card-img-tiles {
+    display: block;
+    border-bottom: 1px solid #e1e7ec;
+}
+
+a {
+    color: #0da9ef;
+    text-decoration: none !important;
+}
+
+.card-img-tiles>.inner {
+    display: table;
+    width: 100%;
+}
+
+.card-img-tiles .main-img, .card-img-tiles .thumblist {
+    display: table-cell;
+    width: 65%;
+    padding: 15px;
+    vertical-align: middle;
+}
+
+.card-img-tiles .main-img>img:last-child, .card-img-tiles .thumblist>img:last-child {
+    margin-bottom: 0;
+}
+
+.card-img-tiles .main-img>img, .card-img-tiles .thumblist>img {
+    display: block;
+    width: 100%;
+    margin-bottom: 6px;
+}
+.thumblist {
+    width: 35%;
+    border-left: 1px solid #e1e7ec !important;
+    display: table-cell;
+    width: 65%;
+    padding: 15px;
+    vertical-align: middle;
+}
+
+
+
+.card-img-tiles .thumblist>img {
+    display: block;
+    width: 100%;
+    margin-bottom: 6px;
+}
+.btn-group-sm>.btn, .btn-sm {
+    padding: .45rem .5rem !important;
+    font-size: .875rem;
+    line-height: 1.5;
+    border-radius: .2rem;
+}
