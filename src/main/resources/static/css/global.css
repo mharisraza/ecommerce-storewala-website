@@ -4,8 +4,33 @@
 	font-size: 35px!important;
 }
 
+.fs-13 {
+	font-size: 13px!important;
+}
+
+.fs-10 {
+	font-size: 10px!important;
+}
+
+.fs-12 {
+	font-size: 12px!important;
+}
+
 .primary-background {
 	background-color: #ae52d4!important;
+}
+
+
+.h-100 {
+	height: 100vh!important;
+}
+
+.mt-auto {
+	margin-top: auto!important;
+}
+
+.text-bg-color {
+	color: #ae52d4!important;
 }
 
 .w-65{
@@ -14,4 +39,41 @@
 
 .navy-blue {
 	background-color: #b4ffff!important;
+}
+
+.shadowed {
+	box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;	
+}
+
+.shadowed-1 {
+	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.del {
+	text-decoration: line-through;
+}
+
+.animation {
+	transition: transform 0.4s ease;
+}
+
+.animation:hover {
+	transform: scale(1.1);
+	cursor: pointer;
+}
+
+.divider {
+	width: 50%;
+    padding: 5px;
+    color: #ae52d4!important;
+    border-radius: 4px;
+}
+
+.width-30p {
+	width: 30%
+}	
+
+.text-bottom {
+	bottom: 0;
+	text-align: center!important;
 }

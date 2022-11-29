@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="base::Layout(~{::body})">
+<head>
+<meta charset="UTF-8" />
+<title>Document</title>
+</head>
+<body>
+
+	<section class="testimonial py-5" id="testimonial">
+		<div class="container">
+			<div class="row ">
+				<div
+					class="col-md-4 py-5 primary-background text-white text-center card shadowed-1">
+					<div class=" ">
+						<div class="card-body">
+							<img class="width-30p" src="/images/logo.png">
+							<h1 class="fw-bold">STOREWALA</h1>
+
+							<p>We provide best and fresh products in the pakistan.</p>
+
+							<p class="text-bottom">
+								Already have an account? <a class="fw-bold text-warning"
+									href="/login">Login!</a>
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-8 py-5 border card shadowed-1 ml-2">
+					<h4 class="pb-4 text-center">Please fill with your details</h4>
+
+
+					<form th:action="@{/process-registration}" action="/process-registration" method="POST" class="row g-3" th:object="${user}">
+						<div class="col-md-6">
+							<label for="name" class="form-label">Full Name</label> <input name="name"
+								th:value="${user.name}" type="text" placeholder="John Doe" class="form-control" id="name">
+						</div>
+						<div class="col-md-6">
+							<label for="email" class="form-label">Email Address</label> <input name="email"
+								th:value="${user.email}" type="email" placeholder="johndoe@example.com" class="form-control" id="email">
+						</div>
+						<div class="col-md-6">
+							<label for="phone" class="form-label">Phone Number</label> <input name="phone"
+								th:value="${user.phone}" type="number" class="form-control" id="phone"
+								placeholder="(555) 555-1234.">
+						</div>
+						<div class="col-md-6">
+							<label for="role" class="form-label">Your Role</label>
+							
+							<select name="user_role"
+								id="role" class="form-select">
+								<option selected value="non-selected">Choose Your Role</option>
+								<option value="customer">Customer</option>
+								<option value="seller">Seller</option>
+							</select>
+							 
+						</div>
+						<div class="col-md-6">
+							<label for="password" class="form-label">Password</label> <input name="password"
+								th:value="${user.password}" type="password" placeholder="**********" class="form-control" id="password">
+						</div>
+						
+						<div class="col-md-6">
+							<label for="confirm-password" class="form-label">Confirm Password</label> <input name="confirm-password"
+								placeholder="**********" type="password" class="form-control" id="confirm-password">
+						</div>
+						
+
+						<br>
+
+						<div class="form-row text-center">
+							<button type="submit"
+								class="btn primary-background text-white offset-2 col-8">Register</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+
+</body>
+</html>
