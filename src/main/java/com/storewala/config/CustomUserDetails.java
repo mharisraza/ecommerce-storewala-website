@@ -7,14 +7,13 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import com.storewala.dao.UserRepository;
 import com.storewala.entities.User;
 
 
 
 public class CustomUserDetails implements UserDetails {
 	
+	private static final long serialVersionUID = 1L;
 	
 	private User user;
 		
@@ -25,8 +24,7 @@ public class CustomUserDetails implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(user.getRole());
-		return List.of(simpleGrantedAuthority);
+		return List.of(new SimpleGrantedAuthority(user.getRole()));
 		
 		
 	}

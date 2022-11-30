@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="base::Layout(~{::body})">
+<head>
+<meta charset="UTF-8" />
+<title>Document</title>
+</head>
+<body>
+
+	<br>
+	<br>
+	<br>
+
+	<div class="login-page bg-light">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-10 offset-lg-1">
+					<div class="bg-white shadowed-1 rounded">
+						<div class="row">
+							<div class="col-md-7 pe-0">
+								<div class="form-left h-100 py-5 px-5">
+									<h1 class="fw-bold text-bg-color text-center">LOGIN HERE!</h1>
+									<center>
+										<hr class="width-50p">
+									</center>
+									<form th:action="@{/login}" method="POST" class="row g-4">
+
+										<input type="hidden" id="status" th:value="${session.status}">
+										<th:block th:if="${session.status}"
+											th:text="${#session.removeAttribute('status')}"></th:block>
+
+										<div class="col-12">
+											<label>Email Address<span class="text-danger">*</span></label>
+											<div class="input-group">
+												<div class="input-group-text">
+													<i class="fa fa-user"></i>
+												</div>
+												<input name="username" type="text" class="form-control"
+													placeholder="Enter your email address">
+											</div>
+										</div>
+
+										<div class="col-12">
+											<label>Password<span class="text-danger">*</span></label>
+											<div class="input-group">
+												<div class="input-group-text">
+													<i class="fa fa-lock"></i>
+												</div>
+												<input name="password" type="password" class="form-control"
+													placeholder="Enter your password">
+											</div>
+										</div>
+
+
+
+
+
+										<div class="col-10 offset-0">
+											<button type="submit"
+												class="col-10 text-center btn primary-background text-white px-4 float-end mt-2">LOGIN</button>
+										</div>
+
+
+									</form>
+								</div>
+							</div>
+							<div class="col-md-5 ps-0 d-none d-md-block">
+								<div
+									class="form-right h-100 primary-background text-white text-center pt-5">
+									<img class="width-30p" src="/images/logo.png">
+									<h2 class="fw-bold">STOREWALA</h2>
+									<p>Don't have an account?</p>
+									<button onclick="location.href='/register'"
+										class="btn btn-warning">Register Now!</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

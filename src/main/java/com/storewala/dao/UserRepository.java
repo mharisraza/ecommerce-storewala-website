@@ -10,11 +10,9 @@ import com.storewala.entities.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
 	
-	@Query(value = "select count(*) from users where user_email = ?", nativeQuery = true)
-	public Integer checkIfEmailExist(@Param("email") String email);
 	
-	@Query(value = "select * from users where user_email = ?", nativeQuery = true)
-	public User loadUserByUserEmail(@Param("email") String email);
+	@Query("select u from User u where u.email =:email")
+	public User loadUserByUserName(@Param("email") String email);
 
 }
 	

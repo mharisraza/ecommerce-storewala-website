@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -17,9 +18,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.logout.LogoutHandler;
 
 import com.storewala.dao.UserRepository;
 import com.storewala.entities.User;
@@ -72,29 +73,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.permitAll()
 		.and()
 		.formLogin()
-		.loginPage("/login")
 		.successHandler(new AuthenticationSuccessHandler() {
 			
 			@Override
 			public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 					Authentication authentication) throws IOException, ServletException {
 				
-				User user = userRepo.loadUserByUserEmail(authentication.getName());
+				User user = userRepo.loadUserByUserName(authentication.getName());
 				
 				String redirectURL = request.getContextPath();
 				
-				if(user.getRole().equals("CUSTOMER")) {
+				if(user.getRole().equals("ROLE_CUSTOMER")) {
 					redirectURL = "/customer/home";
 				}
-				if(user.getRole().equals("SELLER")) {
+				if(user.getRole().equals("ROLE_SELLER")) {
 					redirectURL = "/seller/home";
 				}
-				if(user.getRole().equals("ADMIN")) {
+				if(user.getRole().equals("ROLE_ADMIN")) {
 					redirectURL = "/admin/home";
 				}
 				
 				response.sendRedirect(redirectURL);
-				
 				
 			}
 		})
@@ -103,7 +102,54 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			@Override
 			public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
 					AuthenticationException exception) throws IOException, ServletException {
-				// TODO Auto-generated method stub
+				
+				HttpSession httpSession = request.getSession();
+				
+				if(exception.getMessage().equals("Bad credentials")) {
+					httpSession.setAttribute("status", "bad-credentials");
+					response.sendRedirect("/login?=BadCredentials");
+					return;
+				}
+				
+				if(exception.getMessage().equals("User is disabled")) {
+					httpSession.setAttribute("status", "user-disabled");
+					response.sendRedirect("/login?=AccountSuspended");
+				}
+
+			}
+		})
+		.loginPage("/login")
+		.and()
+		.logout()
+		.logoutUrl("/logout")
+		.addLogoutHandler(new LogoutHandler() {
+			
+			@Override
+			public void logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
+
+				try {
+					HttpSession httpSession = request.getSession();
+					
+					if(authentication!=null) {
+
+						httpSession.setAttribute("status", "logout-success");
+						response.sendRedirect("/logout?=Success");
+						return;
+						
+					}
+					
+					else {
+						httpSession.setAttribute("status", "not-logged-in");
+						response.sendRedirect("/login?=doLogin");
+					}
+					
+					
+					
+					
+				}
+				catch(Exception e) {
+					e.printStackTrace();
+				}
 				
 			}
 		})

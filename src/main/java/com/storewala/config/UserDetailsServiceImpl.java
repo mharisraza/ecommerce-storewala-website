@@ -14,13 +14,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	private UserRepository userRepo;
 
 	@Override
-	public UserDetails loadUserByUsername(String userEmail) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
-		User user = this.userRepo.loadUserByUserEmail(userEmail);
+		User user = this.userRepo.loadUserByUserName(username);
 		
 		if(user==null) {
 			throw new UsernameNotFoundException("No user is available for this email address.");
 		}
+		
 		return new CustomUserDetails(user);
 	}
 

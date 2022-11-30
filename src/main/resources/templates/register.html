@@ -27,50 +27,84 @@
 					</div>
 				</div>
 				<div class="col-md-8 py-5 border card shadowed-1 ml-2">
+
+					<input type="hidden" id="status" th:value="${session.status}">
+					<th:block th:if="${session.status}"
+						th:text="${#session.removeAttribute('status')}"></th:block>
+
 					<h4 class="pb-4 text-center">Please fill with your details</h4>
 
 
-					<form th:action="@{/process-registration}" action="/process-registration" method="POST" class="row g-3" th:object="${user}">
+					<form th:action="@{/process-registration}"
+						action="/process-registration" method="POST" class="row g-3"
+						th:object="${user}">
 						<div class="col-md-6">
-							<label for="name" class="form-label">Full Name</label> <input name="name"
-								th:value="${user.name}" type="text" placeholder="John Doe" class="form-control" id="name">
+							<label for="name" class="form-label">Full Name</label> <input
+								name="name" th:value="${user.name}" type="text"
+								placeholder="John Doe" class="form-control" id="name"
+								th:classappend="${#fields.hasErrors('name') ? 'is-invalid':''}">
+
+							<div class="invalid-feedback"
+								th:each="e : ${#fields.errors('name')}" th:text="${e}"></div>
+
+
 						</div>
 						<div class="col-md-6">
-							<label for="email" class="form-label">Email Address</label> <input name="email"
-								th:value="${user.email}" type="email" placeholder="johndoe@example.com" class="form-control" id="email">
+							<label for="email" class="form-label">Email Address</label> <input
+								name="email" th:value="${user.email}" type="email"
+								placeholder="johndoe@example.com" class="form-control"
+								id="email"
+								th:classappend="${(#fields.hasErrors('email') ? 'is-invalid':'') + (session.status=='email-exist' ? 'is-invalid' : '')}">
+
+							<div class="invalid-feedback"
+								th:each="e : ${#fields.errors('email')}" th:text="${e}"></div>
+						</div>
+						
+						<div th:if="${session.status=='email-exist'}" class="invalid-feedback">
+						This Email Address is already exist!
+						</div>
+						
+						<div class="col-md-6">
+							<label for="phone" class="form-label">Phone Number</label> <input
+								name="phone" th:value="${user.phone}" type="number"
+								class="form-control" id="phone" placeholder="(555) 555-1234."
+								th:classappend="${#fields.hasErrors('phone') ? 'is-invalid':''}">
+
+							<div class="invalid-feedback"
+								th:each="e : ${#fields.errors('phone')}" th:text="${e}"></div>
 						</div>
 						<div class="col-md-6">
-							<label for="phone" class="form-label">Phone Number</label> <input name="phone"
-								th:value="${user.phone}" type="number" class="form-control" id="phone"
-								placeholder="(555) 555-1234.">
-						</div>
-						<div class="col-md-6">
-							<label for="role" class="form-label">Your Role</label>
-							
-							<select name="user_role"
-								id="role" class="form-select">
+							<label for="role" class="form-label">Your Role</label> <select
+								name="user_role" id="role" class="form-select">
 								<option selected value="non-selected">Choose Your Role</option>
 								<option value="customer">Customer</option>
 								<option value="seller">Seller</option>
 							</select>
-							 
+
 						</div>
 						<div class="col-md-6">
-							<label for="password" class="form-label">Password</label> <input name="password"
-								th:value="${user.password}" type="password" placeholder="**********" class="form-control" id="password">
+							<label for="password" class="form-label">Password</label> <input
+								name="password" th:value="${user.password}" type="password"
+								placeholder="**********" class="form-control" id="password"
+								th:classappend="${#fields.hasErrors('password') ? 'is-invalid':''}">
+
+							<div class="invalid-feedback"
+								th:each="e : ${#fields.errors('password')}" th:text="${e}"></div>
 						</div>
-						
+
 						<div class="col-md-6">
-							<label for="confirm-password" class="form-label">Confirm Password</label> <input name="confirm-password"
-								placeholder="**********" type="password" class="form-control" id="confirm-password">
+							<label for="confirm-password" class="form-label">Confirm
+								Password</label> <input class="form-control" type="password" name="confirm_password" placeholder="**********"
+								>
 						</div>
-						
+
+
 
 						<br>
 
 						<div class="form-row text-center">
 							<button type="submit"
-								class="btn primary-background text-white offset-2 col-8">Register</button>
+								class="btn primary-background text-white offset-0 col-8">Register</button>
 						</div>
 					</form>
 				</div>
