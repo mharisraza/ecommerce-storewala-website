@@ -25,9 +25,6 @@
 									</center>
 									<form th:action="@{/login}" method="POST" class="row g-4">
 
-										<input type="hidden" id="status" th:value="${session.status}">
-										<th:block th:if="${session.status}"
-											th:text="${#session.removeAttribute('status')}"></th:block>
 
 										<div class="col-12">
 											<label>Email Address<span class="text-danger">*</span></label>

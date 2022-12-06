@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="base::Layout(~{::body})">
+<head>
+<meta charset="UTF-8" />
+<title>Document</title>
+</head>
+<body>
+
+	<br>
+	<br>
+
+	<div class="container">
+		<form action="/order/processing-order" method="POST" class="row">
+
+			<div class="col-md-6 my-3">
+
+				<div class="card">
+
+					<div class="card-body">
+
+						<h3 class="text-center fw-bold mb-3">Your Selected Items:</h3>
+						<div class="cart-body"></div>
+
+					</div>
+
+				</div>
+
+
+			</div>
+
+			<div class="col-md-6 my-3">
+
+				<div class="card">
+
+					<div class="card-body">
+
+						<h3 class="text-center fw-bold mb-3">Your Details for the
+							Order</h3>
+
+						<div class="form-floating mb-3">
+							<input readonly="readonly" class="form-control" id="floatingInput"
+								placeholder="name@example.com" th:value="${user.email}"> <label
+								for="floatingInput">Email address</label>
+						</div>
+						
+						<div class="form-floating mb-3">
+							<input readonly="readonly" class="form-control" id="floatingInput"
+								placeholder="John Doe" th:value="${user.name}"> <label
+								for="floatingInput">Full Name</label>
+						</div>
+						
+						<div class="form-floating mb-3">
+							<textarea required="required" class="form-control" placeholder="Enter your Address"></textarea>
+							<label>Enter your address</label>
+						</div>
+						
+						
+					   <button class="btn primary-background text-white col-8 offset-2" type="submit">Order Now</button>
+
+
+
+
+					</div>
+
+				</div>
+
+
+			</div>
+
+
+
+
+		</form>
+	</div>
+
+
+
+</body>
+</html>

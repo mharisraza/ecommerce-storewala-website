@@ -10,11 +10,12 @@
 <!-- =========== -->
 
 <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
 
 <!-- WebLogo -->
- <link rel="icon" type="image/x-icon" href="/images/logo.png">
+<link rel="icon" type="image/x-icon" href="/images/logo.png">
 <!-- ======= -->
 
 <!-- My CSS -->
@@ -23,9 +24,22 @@
 <!-- ============= -->
 
 <!-- FrameWork CSS(s) -->
-<link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" >
-<link href="/css/font.css?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link
+	href="/css/font.css?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css"
+	integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc="
+	crossorigin="anonymous" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.0/css/boxicons.min.css"
+	integrity="sha512-pVCM5+SN2+qwj36KonHToF2p1oIvoU3bsqxphdOIWMYmgr4ZqD3t5DjKvvetKhXGc/ZG5REYTT6ltKfExEei/Q=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+	integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
 <!-- =========== -->
 
 <!-- My JS(s) -->
@@ -34,7 +48,7 @@
 <!-- ============ -->
 
 <!-- Sweet Alert -->
-<script src="/js/sweet-alert.js"></script>
+<script src="/js/sweet.alert.js"></script>
 <!-- =========== -->
 
 
@@ -43,45 +57,191 @@
 </head>
 <body>
 
-	<nav class="navbar sticky-top navbar-expand-lg navbar-dark primary-background shadowed-1">
-	
-		<div class="container-fluid">
-			<a class="navbar-brand fw-bold fs-35" href="/home"><img class="w-65" src="/images/logo.png">STOREWALA</a>
-			<button class="navbar-toggler" type="button"
-				data-bs-toggle="collapse" data-bs-target="#navbarText"
-				aria-controls="navbarText" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			
-			<div class="collapse navbar-collapse" id="navbarText">
-				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="#">Home</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">About</a>
-					</li>
-					<li class="nav-item"><a class="nav-link" href="http://github.com/mharisraza	">Github@mharisraza</a>
-					</li>
-				</ul>
-				
-				<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-					<li class="nav-item btn btn-outline-warning me-2"><i class="fa-solid fa-cart-shopping"></i> Cart <span class="badge bg-dark text-white">1</span></li>
-					<li onclick="location.href='register'" class="nav-item btn btn-outline-warning">Sign Up</li>
-					
-				</ul>
-			</div>
-		</div>
-	</nav>
+	<header class="section-header">
+		<section class="header-main">
+			<div class="container">
+				<div class="row gy-3 align-items-center">
+					<div class="col-lg-2 col-sm-4 col-4">
+						<a href="/home" class="navbar-brand"> <img class="ml-minus40"
+							height="70" src="/images/logo1.png">
+						</a>
+						<!-- brand end.// -->
 
+					</div>
+
+
+
+
+
+
+
+
+					<div class="order-lg-last col-lg-5 col-sm-8 col-8">
+						<div class="float-end">
+
+
+
+
+							<div th:if="${user!=null}" class="btn-group">
+								<button type="button" class="btn btn-light dropdown-toggle"
+									data-bs-toggle="dropdown" aria-expanded="false">
+									<img height="20" width="20"
+										class="rounded-circle"
+										th:src="'/users_profile/'+${user.profile}">&nbsp;<span class="ms-1 d-none d-sm-inline-block">[(${user.name})]</span>
+								</button>
+								<ul class="dropdown-menu">
+								<li><a href="/admin/home" th:if="${user.role == 'ROLE_ADMIN'}" class="dropdown-item" >Admin Panel</a>
+								<li><a href="/seller/home" th:if="${user.role == 'ROLE_SELLER'}" class="dropdown-item" >Seller Panel</a>
+								<li><a href="/myOrders" th:if="${user.role == 'ROLE_CUSTOMER'}" class="dropdown-item" >My Orders</a>
+									<li><a class="dropdown-item" href="/profile">Profile
+											Setting</a></li>
+									<li><a class="dropdown-item" href="/logout">Logout</a></li>
+
+								</ul>
+							</div>
+
+
+
+							<a th:unless="${user!=null}" href="/login" class="btn btn-light">
+								<i class="fa fa-user"></i> <span
+								class="ms-1 d-none d-sm-inline-block">Sign in </span>
+							</a>
+
+							<button th:unless="${user!=null} and ${user.role == 'ROLE_SELLER' || user.role == 'ROLE_ADMIN'}" data-bs-toggle="modal" data-bs-target="#cart-modal"
+								class="btn btn-light">
+								<i class="fa fa-shopping-cart"></i> <span class="ms-1">My
+									cart <span
+									class="badge primary-background text-white cart-items">1</span>
+								</span>
+							</button>
+						</div>
+					</div>
+
+
+					<!-- col end.// -->
+					<div class="col-lg-5 col-md-12 col-12">
+						<form action="/search" class="">
+							<div class="input-group">
+								<input type="search" name="query" class="form-control"
+									style="width: 35%;" placeholder="Search for product here">
+								<select class="form-select" name="category">
+									<option value="AllCategories" selected>All Categories</option>
+									<option th:each="category : ${categories}"
+										th:value="${category.title}">[(${category.title})]</option>
+								</select>
+								<button class="btn primary-background text-white">
+									<i class="fa fa-search"></i>
+								</button>
+							</div>
+							<!-- input-group end.// -->
+						</form>
+					</div>
+
+					<!-- col end.// -->
+
+				</div>
+				<!-- row end.// -->
+			</div>
+			<!-- container end.// -->
+		</section>
+		<!-- header-main end.// -->
+
+		<nav class="navbar navbar-light primary-background navbar-expand-lg">
+			<div class="container">
+				<button class="navbar-toggler border" type="button"
+					data-bs-toggle="collapse" data-bs-target="#navbar_main">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbar_main">
+					<ul class="navbar-nav">
+						<li class="nav-item"><a class="nav-link text-white"
+							href="/home"><i class="fa-solid fa-house text-white"></i>&nbsp;Home</a></li>
+
+
+						<li class="nav-item"><a class="nav-link text-white"
+							href="/about-us"><i
+								class="fa-solid fa-address-card text-white"></i>&nbsp;About Us</a></li>
+
+						<li class="nav-item"><a class="nav-link text-white"
+							href="/unban-request"><i
+								class="fa-sharp fa-solid fa-ban text-white"></i>&nbsp;Unban
+								Request</a></li>
+
+
+
+					</ul>
+				</div>
+				<!-- collapse end.// -->
+			</div>
+			<!-- container end.// -->
+		</nav>
+		<!-- navbar end.// -->
+	</header>
+	<!-- section-header end.// -->
+
+	<!-- ================ SECTION INTRO ================ -->
+
+
+	<input type="hidden" id="status" th:value="${session.status}">
+	<th:block th:if="${session.status}"
+		th:text="${#session.removeAttribute('status')}"></th:block>
+
+
+	<div id="snackbar"></div>
 
 
 	<div th:replace="${content}"></div>
 
-<!-- FrameWork JS(s) -->
 
-<script src="/js/popper.js" ></script>
-<script src="/js/bootstrap.min.js"></script>
-<!-- -->
+
+
+
+
+
+
+
+
+
+
+
+
+	<!-- Cart Modal -->
+	<div class="modal fade" id="cart-modal" data-bs-backdrop="static"
+		data-bs-keyboard="false" tabindex="-1"
+		aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog modal-xl">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title fw-bold text-primary"
+						id="staticBackdropLabel">
+						<i class="fa-solid  fa-cart-shopping"></i>&nbsp;YOUR CART
+					</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body cart-body">
+
+					
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn primary-background text-white"
+						data-bs-dismiss="modal">Continue Shopping</button>
+					<button onclick="checkOut()" type="button"
+						class="btn btn-success checkout-btn">CHECKOUT</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- FrameWork JS(s) -->
+    <script src="/js/fslightbox.js"></script>
+	<script src="/js/popper.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script
+		src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js"
+		referrerpolicy="origin"></script>
+	<!-- -->
 
 
 </body>

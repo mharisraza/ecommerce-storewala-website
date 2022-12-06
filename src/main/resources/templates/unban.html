@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="base::Layout(~{::body})">
+<head>
+<meta charset="UTF-8" />
+<title>Document</title>
+</head>
+<body>
+
+	<br>
+
+
+
+	<br>
+
+	<center>
+		<h4 class="fw-bold text-center badge-soft-success unban-h2 width-30p">Request
+			for Unban</h4>
+	</center>
+
+	<center>
+		<hr class="width-50p">
+	</center>
+
+	<div class="container">
+
+		<div class="card shadowed-2">
+
+			<div class="card-body">
+
+				<form th:object="${unbanRequest}" th:action="@{/processing-unban-request}" method="POST" class="row g-2">
+
+
+					<div class="col-md-6">
+						<div class="form-floating">
+							<input type="email" class="form-control" id="floatingInputGrid"
+								placeholder="name@example.com"
+								name="email"
+								th:classappend="${#fields.hasErrors('email') ? 'is-invalid' : ''}"> <label
+								for="floatingInputGrid">Email address</label>
+								
+								<div th:each="errors : ${#fields.errors('email')}" class="invalid-feedback">[(${errors})]</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-floating">
+							<select class="form-select" id="floatingSelectGrid"
+								aria-label="Floating label select example">
+								<option selected>Account Suspended</option>
+							</select> <label for="floatingSelectGrid">Subject</label>
+						</div>
+					</div>
+
+					<div class="col-12">
+
+						<div class="form-floating" >
+							<textarea rows="10" onkeyup="countChar(this)"  name="message" class="form-control" id="floatingInputGrid"
+								placeholder="Enter your message"
+								th:classappend="${#fields.hasErrors('message') ? 'is-invalid' : ''}"></textarea> <label
+								for="floatingInputGrid">Enter your message</label>
+								
+								<div th:each="errors : ${#fields.errors('message')}" class="invalid-feedback">[(${errors})]</div>
+								<p class="text-success text-end me-2 mt-1">Characters left: <span class="text-success" id="charNum">500</span> </p>
+								
+								
+						</div>
+						
+						<br>
+						
+						<center><hr class="width-50p"></center>
+						
+
+
+					</div>
+					
+					<div class="col col-12">
+					
+					<button type="submit" class="col col-6 offset-3 btn primary-background text-white">Submit Request</button>
+					
+					</div>
+
+
+
+
+
+
+
+
+				</form>
+
+
+			</div>
+
+		</div>
+
+
+	</div>
+
+</body>
+</html>

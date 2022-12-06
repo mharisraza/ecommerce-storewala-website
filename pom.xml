@@ -17,8 +17,8 @@
 	</properties>
 
 	<dependencies>
-	
-	<!-- https://mvnrepository.com/artifact/javax.validation/validation-api -->
+
+		<!-- https://mvnrepository.com/artifact/javax.validation/validation-api -->
 		<dependency>
 			<groupId>javax.validation</groupId>
 			<artifactId>validation-api</artifactId>
@@ -30,6 +30,7 @@
 			<artifactId>hibernate-validator</artifactId>
 			<version>6.2.2.Final</version>
 		</dependency>
+
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -51,7 +52,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		
+
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

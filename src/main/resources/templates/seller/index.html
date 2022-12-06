@@ -2,10 +2,382 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
 	th:replace="base::Layout(~{::body})">
 <head>
-	<meta charset="UTF-8" />
-	<title>Document</title>
+<meta charset="UTF-8" />
+<title>Document</title>
 </head>
 <body>
-	
+
+
+
+	<br>
+
+
+	<div class="container">
+
+		<div class="row">
+
+			<div class="col-md-6 col-lg-6 mb-2">
+
+				<div class="card bg-green text-white shadowed-1">
+
+					<div class="card-body">
+
+						<div class="row">
+
+							<div class="col col-xs-6">
+
+								<h3 class="fw-bold mt-4">ADD NEW PRODUCT</h3>
+
+
+
+							</div>
+
+							<div class="col col-xs-6 text-end">
+
+								<button data-bs-toggle="modal" data-bs-target="#product-modal"
+									class="btn btn-warning col-12 mt-3 p-4 fw-bold">NEW
+									PRODUCT</button>
+
+							</div>
+
+						</div>
+
+
+
+					</div>
+
+
+				</div>
+
+
+			</div>
+
+			<div class="col-md-6 col-lg-6 mb-2">
+
+				<div class="card bg-orange text-white shadowed-1">
+
+					<div class="card-body">
+
+						<div class="row">
+
+							<div class="col col-xs-6">
+
+								<h2 class="fw-bold mt-3">Products</h2>
+								<h6 class="">Total Products: [[${#lists.size(products)}]]</h6>
+
+
+
+							</div>
+
+							<div class="col col-xs-6 text-end">
+
+								<button class="btn btn-success col-12 mt-3 p-4 fw-bold"
+									onclick="">VIEW PRODUCTS</button>
+
+							</div>
+
+						</div>
+
+
+
+					</div>
+
+
+				</div>
+
+
+			</div>
+
+
+
+
+		</div>
+
+	</div>
+
+
+
+	<br>
+
+	<br>
+	<center>
+		<hr class="width-50p">
+	</center>
+	<br>
+
+	<h3 class="fw-bold card-title text-center">
+		Total Orders: <span class="text-muted">100</span>
+	</h3>
+
+	<br>
+
+
+
+
+	<div class="container">
+
+		<div class="row">
+
+			<div class="col-12">
+
+				<div class="card shadowed-1 mb-3">
+
+					<div class="container">
+						<div class="row align-items-center">
+							<div class="col-md-6"></div>
+							<div class="col-md-6">
+								<div
+									class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
+									<div></div>
+
+
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="">
+									<div class="table-responsive">
+										<table
+											class="table project-list-table table-nowrap align-middle table-borderless">
+											<thead>
+												<tr>
+													<th scope="col">ORDER ID</th>
+													<th scope="col">Name</th>
+													<th scope="col">Status</th>
+													<th scope="col">Created</th>
+													<th scope="col">Delivery Date</th>
+													<th scope="col">Quantities</th>
+													<th scope="col">Product</th>
+													
+													<th scope="col" style="width: 200px;">Action</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>#SW870870</td>
+													<td><img
+														src="https://bootdey.com/img/Content/avatar/avatar1.png"
+														alt="" class="avatar-sm rounded-circle me-2" /><a
+														href="#" class="text-body">Muhammad Haris</a></td>
+													<td><span class="badge badge-soft-primary mb-0">Pending</span></td>
+													<td>01/12/2022</td>
+													<td>01/12/2022</td>
+													<td>10</td>
+													<td>Product ID: #17</td>
+													<td><a href="#" class="table-link"> <span class="fa-stack">
+																<i class="fa fa-square fa-stack-2x"></i> <i
+																rel="tooltip"
+																title="Cancel"
+																class="fa fa-ban fa-stack-1x fa-inverse bg-danger"></i>
+														</span>
+													</a>
+													
+													<a href="#" class="table-link"> <span class="fa-stack">
+																<i class="fa fa-square fa-stack-2x"></i> <i
+																rel="tooltip"
+																title="Update"
+																class="fa fa-pencil fa-stack-1x fa-inverse bg-success"></i>
+														</span>
+													</a>
+													
+													
+													</td>
+												</tr>
+
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row g-0 align-items-center pb-4">
+							<div class="col-sm-6"></div>
+							<hr>
+							<div class="col-sm-6">
+								<div class="float-sm-center">
+									<ul class="pagination mb-sm-0">
+										<li class="page-item disabled"><a href="#"
+											class="page-link"><i class="mdi mdi-chevron-left"></i></a></li>
+										<li class="page-item active"><a href="#"
+											class="page-link">1</a></li>
+										<li class="page-item"><a href="#" class="page-link">2</a></li>
+										<li class="page-item"><a href="#" class="page-link">3</a></li>
+										<li class="page-item"><a href="#" class="page-link">4</a></li>
+										<li class="page-item"><a href="#" class="page-link">5</a></li>
+										<li class="page-item"><a href="#" class="page-link"><i
+												class="mdi mdi-chevron-right"></i></a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+
+			</div>
+
+
+		</div>
+
+	</div>
+
+
+
+	<!-- STart Product Modal -->
+
+
+	<!-- Modal -->
+	<div class="modal fade" id="product-modal" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-xl">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title fw-bold text-primary" id="exampleModalLabel">ADD
+						NEW PRODUCT</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+
+					<div class="container tm-mt-big tm-mb-big">
+						<div class="row">
+							<div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
+								<div class="tm-bg-primary-dark tm-block tm-block-h-auto">
+									<div class="row"></div>
+
+									<div class="row tm-edit-product-row">
+
+										<div class="col-xl-6 col-lg-6 col-md-12">
+											<form method="POST" th:action="@{/seller/product/new}"
+												th:object="${product}" enctype="multipart/form-data"
+												class="tm-edit-product-form">
+
+												<div class="form-group mb-3">
+													<label for="name">Product Name </label> <input id="name"
+														th:value="${product.name}" name="name" type="text"
+														class="form-control validate"
+														th:classappend="${#fields.hasErrors('name') ? 'is-invalid':''}">
+
+													<div class="invalid-feedback"
+														th:each="e : ${#fields.errors('name')}" th:text="${e}"></div>
+												</div>
+												<div class="form-group mb-3">
+													<label for="description">Product Highlights</label>
+													<textarea name="highlights" class="form-control validate"
+														th:value="${product.highlights}" rows="3"
+														th:classappend="${#fields.hasErrors('highlights') ? 'is-invalid' : ''}"></textarea>
+
+													<div th:each="e : ${#fields.errors('highlights')}"
+														th:text="${e}" class="invalid-feedback"></div>
+												</div>
+
+												<div class="form-group mb-3">
+													<label for="description">Product Description</label>
+													<textarea id="productdescription" name="description"
+														th:value="${product.description}"
+														class="form-control validate" rows="3"
+														th:classappend="${#fields.hasErrors('description') ? 'is-invalid' : ''}"></textarea>
+
+													<div th:each="e : ${#fields.errors('description')}"
+														th:text="${e}" class="invalid-feedback"></div>
+												</div>
+
+												<div class="form-group mb-3">
+													<label for="category">Category</label> <select
+														name="product_category"
+														class="custom-select form-select tm-select-accounts"
+														id="category">
+
+
+														<option th:each="productCategory : ${categories}"
+															th:value="${productCategory.id}">[(${productCategory.title})]</option>
+
+													</select>
+												</div>
+												<div class="row">
+													<div class="form-group mb-3 col-xs-12 col-sm-6">
+														<label for="expire_date">Price <span class="fs-10 text-success">(automatically format.)</span></label> <input name="price"
+															id="expire_date" type="number"
+															th:value="${product.price}" class="form-control validate"
+															data-large-mode="true"
+															th:classappend="${#fields.hasErrors('price') ? 'is-invalid':''}">
+
+														<div class="invalid-feedback"
+															th:each="e : ${#fields.errors('price')}" th:text="${e}"></div>
+													</div>
+													<div class="form-group mb-3 col-xs-12 col-sm-6">
+														<label for="stock">Units In Stock </label> <input
+															name="stocks" id="stock" type="number"
+															th:value="${product.stocks}"
+															class="form-control validate"
+															th:classappend="${#fields.hasErrors('stocks') ? 'is-invalid':''}">
+
+														<div class="invalid-feedback"
+															th:each="e : ${#fields.errors('stocks')}" th:text="${e}"></div>
+													</div>
+													<div class="form-group mb-3 col-xs-12 col-sm-12">
+														<label for="stock">Discount: %</label> <input
+															th:value="${product.discount}" value="0" min="0" max="99"
+															name="discount" type="number"
+															class="form-control validate" id="discount"
+															th:classappend="${#fields.hasErrors('discount') ? 'is-invalid':''}">
+
+														<div class="invalid-feedback"
+															th:each="e : ${#fields.errors('discount')}"
+															th:text="${e}"></div>
+
+
+													</div>
+												</div>
+										</div>
+
+										<div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
+											<div class="tm-product-img-dummy mx-auto"></div>
+
+											<input name="product_images" style="visibility: hidden;"
+												id="fileupload" type="file" multiple="multiple" /> <input
+												type="button" class="btn btn-primary btn-block mx-auto"
+												value="UPLOAD PRODUCT IMAGES"
+												onclick="document.getElementById('fileupload').click();" />
+												<span class="text-success">(Upto 5 images)</span>
+											<hr>
+											<span class="text-danger">Note: Product showcase image should be at 1st index to show on homepage and in should be png format.</span>
+											<hr>	
+											<div id="dvPreview"></div>
+										</div>
+
+										<hr>
+
+
+										<div class="col-12">
+											<button type="submit"
+												class="btn btn-primary col-8 offset-2 text-center btn-block text-uppercase">Add
+												Product Now</button>
+										</div>
+
+
+
+									</div>
+
+								</div>
+
+							</div>
+
+						</div>
+						</form>
+					</div>
+
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<!-- End Product modal -->
+
+
 </body>
 </html>

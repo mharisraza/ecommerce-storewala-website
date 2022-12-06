@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -17,10 +18,12 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 import com.storewala.dao.UserRepository;
 import com.storewala.entities.User;
@@ -121,34 +124,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.loginPage("/login")
 		.and()
 		.logout()
-		.logoutUrl("/logout")
-		.addLogoutHandler(new LogoutHandler() {
+		.logoutSuccessHandler(new LogoutSuccessHandler() {
 			
 			@Override
-			public void logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
-
-				try {
-					HttpSession httpSession = request.getSession();
-					
-					if(authentication!=null) {
-
-						httpSession.setAttribute("status", "logout-success");
-						response.sendRedirect("/logout?=Success");
-						return;
-						
-					}
-					
-					else {
-						httpSession.setAttribute("status", "not-logged-in");
-						response.sendRedirect("/login?=doLogin");
-					}
-					
-					
-					
-					
+			public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
+					throws IOException, ServletException {
+				
+				HttpSession httpSession = request.getSession();
+				
+				if(authentication!=null) {
+					httpSession.setAttribute("status", "logout-success");
+					response.sendRedirect("/login?logoutSuccess");
 				}
-				catch(Exception e) {
-					e.printStackTrace();
+				else {
+					response.sendRedirect("/login?doLogin");
 				}
 				
 			}

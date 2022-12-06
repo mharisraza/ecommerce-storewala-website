@@ -1,5 +1,8 @@
 package com.storewala.entities;
 
+
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -42,6 +45,9 @@ public class User {
 	@Column(name="user_profile")
 	private String profile;	// user profile image link (No actual image)
 	
+	
+	@Column(name = "regisered_date")
+	private Date date;
 	
 	
 
@@ -107,6 +113,16 @@ public class User {
 
 	public void setProfile(String profile) {
 		this.profile = profile;
+	}
+	
+	
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 	@Override
