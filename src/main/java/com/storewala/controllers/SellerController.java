@@ -25,13 +25,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.storewala.dao.CategoryRepository;
-import com.storewala.dao.ProductRepository;
-import com.storewala.dao.UserRepository;
+import com.storewala.daos.CategoryRepository;
+import com.storewala.daos.ProductRepository;
+import com.storewala.daos.UserRepository;
 import com.storewala.entities.Category;
 import com.storewala.entities.Product;
 import com.storewala.entities.User;
-
 
 @Controller
 @RequestMapping("/seller")
@@ -56,7 +55,7 @@ public class SellerController {
 
 	@GetMapping(value = { "/home", "/" })
 	public String sellerHome(Model m, Principal principal) {
-		
+
 		User user = this.userRepo.loadUserByUserName(principal.getName());
 		List<Product> sellerProducts = this.productRepo.getSellerAllProducts(user.getId());
 
@@ -75,7 +74,7 @@ public class SellerController {
 			@RequestParam("product_images") List<MultipartFile> images,
 			@RequestParam(value = "product_category", required = false) Integer selectedProductCategory, Model m,
 			HttpSession httpSession, Principal principal) {
-		
+
 		User user = this.userRepo.loadUserByUserName(principal.getName());
 
 		List<Category> categories = this.categoryRepo.getCategories();
@@ -88,8 +87,8 @@ public class SellerController {
 			m.addAttribute("products", sellerProducts);
 			return "seller/index";
 		}
-		
-		if(images.size() > 5) {
+
+		if (images.size() > 5) {
 			httpSession.setAttribute("status", "images-exceed");
 			return "redirect:/seller/home";
 		}
@@ -97,7 +96,7 @@ public class SellerController {
 		List<String> productImages = new ArrayList<>();
 
 		try {
-			
+
 			boolean flag = false;
 
 			images.forEach(image -> {
@@ -114,7 +113,6 @@ public class SellerController {
 
 					productImages.add(imageName);
 
-					
 				} catch (Exception e) {
 					httpSession.setAttribute("status", "went-wrong");
 					e.printStackTrace();
@@ -122,7 +120,6 @@ public class SellerController {
 				}
 
 			});
-
 
 			product.setSellerId(user.getId());
 			product.setSellerName(user.getName());
@@ -132,12 +129,12 @@ public class SellerController {
 
 			this.productRepo.save(product);
 			flag = true;
-			
-			if(flag) {
+
+			if (flag) {
 				httpSession.setAttribute("status", "product-added");
 				return "redirect:/seller/home?productAdded";
 			}
-			
+
 			httpSession.setAttribute("status", "went-wrong");
 			return "redirect:/seller/home?internalError";
 

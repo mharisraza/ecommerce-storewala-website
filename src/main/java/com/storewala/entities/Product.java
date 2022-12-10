@@ -1,9 +1,9 @@
 package com.storewala.entities;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
+import java.util.Collection;
+
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -14,11 +14,10 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import net.bytebuddy.asm.Advice.This;
+
 
 @Entity
 @Table(name = "products")
@@ -69,7 +68,7 @@ public class Product {
 	@Column(name = "price_after_discount")
 	private Integer priceAfterDiscount;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Category category;
 
 	public int getId() {

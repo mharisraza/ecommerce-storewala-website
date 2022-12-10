@@ -238,6 +238,19 @@ $(document).ready(function() {
 			button : "OKAY",
 		});
 	}
+	
+	if(status == "commented-successfully") {
+		showToast("Review added successfully");
+	}
+	
+	if(status == "ordered-successfully") {
+		showToast("Ordered successfully. Please look at the order status, Thanks!");
+		localStorage.removeItem("cart");
+	}
+	
+	if(status == "already-ordered") {
+		showToast("The orderYou have already placed an order for this item. Please wait for it to be processed.");
+	}
 
 });
 
@@ -278,4 +291,15 @@ function categoryViewOrAdd() {
 		}
 	});
 
+}
+
+function showToast(content) {
+
+	$("#snackbar").addClass("show");
+	$("#snackbar").html(content);
+
+	// After 3 seconds, remove the show class from DIV
+	setTimeout(() => {
+		$("#snackbar").removeClass("show");
+	}, 3000);
 }

@@ -195,7 +195,14 @@
 }
 	
 
-
+.vertical-scrollable {
+            height: 100px!important;
+            overflow-y: scroll!important;
+        }
+        
+.zero-reviews {
+	height: 100px!important;
+}
 
 
 

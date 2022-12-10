@@ -1,4 +1,4 @@
-package com.storewala.dao;
+package com.storewala.daos;
 
 import java.util.List;
 

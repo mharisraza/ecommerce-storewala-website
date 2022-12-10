@@ -12,6 +12,8 @@
 
 	<div class="container">
 		<form action="/order/processing-order" method="POST" class="row">
+		
+		<input type="hidden" name="user_id" th:value="${user.id}">
 
 			<div class="col-md-6 my-3">
 
@@ -40,7 +42,7 @@
 
 						<div class="form-floating mb-3">
 							<input readonly="readonly" class="form-control" id="floatingInput"
-								placeholder="name@example.com" th:value="${user.email}"> <label
+								 th:value="${user.email}"> <label
 								for="floatingInput">Email address</label>
 						</div>
 						
@@ -51,7 +53,14 @@
 						</div>
 						
 						<div class="form-floating mb-3">
-							<textarea required="required" class="form-control" placeholder="Enter your Address"></textarea>
+							<input readonly="readonly" class="form-control" id="floatingInput"
+							name="pincode"
+								placeholder="Pin Code" th:value="${pincode}"> <label
+								for="floatingInput">Pin code <span class="text-danger fs-10">(Generated automatically, you need to provide it to rider to confirm.)</span></label>
+						</div>
+						
+						<div class="form-floating mb-3">
+							<textarea name="address" required="required" class="form-control" placeholder="Enter your Address"></textarea>
 							<label>Enter your address</label>
 						</div>
 						

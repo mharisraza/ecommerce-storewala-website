@@ -182,7 +182,7 @@
 
 					<div class="card-body">
 
-						<h6 id="product-title" class="text-center card-title fs-13">[(${p.name})]</h6>
+						<a th:href="'/showProduct?product_id='+${p.id}" id="product-title" class="text-center card-title justify-content-center fs-13">[(${p.name})]</a>
 						<p id="product-highlight" class="text-center fs-10">[(${p.highlightShorter(p.highlights)})]</p>
 						<div class="row">
 

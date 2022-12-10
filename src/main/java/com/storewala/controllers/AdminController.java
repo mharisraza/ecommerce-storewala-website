@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.storewala.dao.CategoryRepository;
-import com.storewala.dao.ProductRepository;
-import com.storewala.dao.UserRepository;
+import com.storewala.daos.CategoryRepository;
+import com.storewala.daos.ProductRepository;
+import com.storewala.daos.UserRepository;
 import com.storewala.entities.Category;
 import com.storewala.entities.Product;
 import com.storewala.entities.User;

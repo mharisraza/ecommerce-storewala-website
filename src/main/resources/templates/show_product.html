@@ -11,91 +11,74 @@
 	<br>
 
 	<div class="super_container">
-		<header class="header" style="display: none;">
-			<div class="header_main">
-				<div class="container">
-					<div class="row">
-						<div
-							class="col-lg-6 col-12 order-lg-2 order-3 text-lg-left text-right">
-							<div class="header_search">
-								<div class="header_search_content">
-									<div class="header_search_form_container">
-										<form action="#" class="header_search_form clearfix">
-											<div class="custom_dropdown">
-												<div class="custom_dropdown_list">
-													<span class="custom_dropdown_placeholder clc">All
-														Categories</span> <i class="fas fa-chevron-down"></i>
-													<ul class="custom_list clc">
-														<li><a class="clc" href="#">All Categories</a></li>
-													</ul>
-												</div>
-											</div>
-										</form>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</header>
+
 		<div class="single_product">
 			<div class="container-fluid"
 				style="background-color: #fff; padding: 11px;">
 				<div class="row">
 					<div class="col-lg-2 order-lg-1 order-2">
 						<ul class="image_list">
-						
-						<li><a data-fslightbox="mygalley" data-type="image" href="https://res.cloudinary.com/dxfq3iotg/image/upload/v1565713228/single_2.jpg">
-						<img class="img" height="100" width="100" src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1565713228/single_2.jpg">
-						</a></li>
-						
-						<li><a data-fslightbox="mygalley" data-type="image" href="https://res.cloudinary.com/dxfq3iotg/image/upload/v1565713228/single_2.jpg">
-						<img class="img" height="100" width="100" src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1565713228/single_2.jpg">
-						</a></li>
-						
-						<li><a data-fslightbox="mygalley" data-type="image" href="https://res.cloudinary.com/dxfq3iotg/image/upload/v1565713228/single_2.jpg">
-						<img class="img" height="100" width="100" src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1565713228/single_2.jpg">
-						</a></li>
-						
-						<li><a data-fslightbox="mygalley" data-type="image" href="https://res.cloudinary.com/dxfq3iotg/image/upload/v1565713228/single_2.jpg">
-						<img class="img" height="100" width="100" src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1565713228/single_2.jpg">
-						</a></li>
-						
-							
+
+							<li><a data-fslightbox="mygalley" data-type="image"
+								th:href="'/product_upload/'+${product.images[1]}"> <img
+									class="img" height="100" width="100"
+									th:src="'/product_upload/'+${product.images[1]}">
+							</a></li>
+
+							<li><a data-fslightbox="mygalley" data-type="image"
+								th:href="'/product_upload/'+${product.images[2]}"> <img
+									class="img" height="100" width="100"
+									th:src="'/product_upload/'+${product.images[2]}">
+							</a></li>
+
+							<li><a data-fslightbox="mygalley" data-type="image"
+								th:href="'/product_upload/'+${product.images[3]}"> <img
+									class="img" height="100" width="100"
+									th:src="'/product_upload/'+${product.images[3]}">
+							</a></li>
+
+							<li><a data-fslightbox="mygalley" data-type="image"
+								th:href="'/product_upload/'+${product.images[4]}"> <img
+									class="img" height="100" width="100"
+									th:src="'/product_upload/'+${product.images[4]}">
+							</a></li>
+
+
 						</ul>
 					</div>
 
 
 					<div class="col-lg-4 order-lg-2 order-1">
 						<div class="image_selected">
-						<a data-fslightbox="mygalley" data-type="image" href="https://res.cloudinary.com/dxfq3iotg/image/upload/v1565713229/single_4.jpg">
-							<img class="img"
-								src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1565713229/single_4.jpg"
+							<a data-fslightbox="mygalley" data-type="image"
+								th:href="'/product_upload/'+${product.images[0]}"> <img
+								class="img" th:src="'/product_upload/'+${product.images[0]}"
 								alt="">
-								</a>
+							</a>
 						</div>
 					</div>
 
 					<div class="col-lg-6 order-3">
 						<div class="product_description">
 
-							<div class="product_name">Acer Aspire 3 Celeron Dual Core -
-								(2 GB/500 GB HDD/Windows 10 Home) A315-33 Laptop (15.6 inch,
-								Black, 2.1 kg)</div>
+							<div class="product_name">[(${product.name})]</div>
 							<div class="product-rating">
-								<span class="badge badge-success"><i class="fa fa-star"></i>
-									4.5 Star</span> <span class="rating-review">35 Ratings & 45
-									Reviews</span>
+								<span class="badge badge-soft-success"><i class="fa fa-star"></i>
+									4.5 Star</span> <span class="rating-review">0 Reviews</span> <br> <br>
+								<div class="fw-bold text-primary">Product Highlights:</div>
+								<p>[(${product.highlights})]</p>
 							</div>
 							<div>
-								<span class="product_price">₹ 29,000</span> <strike
-									class="product_discount"> <span style='color: black'>₹
-										2,000<span></strike>
+								<span class="product_price">Rs.[(${#numbers.formatDecimal(product.getDiscountPrice(),
+									0, 'COMMA', 0, 'POINT')})]/-</span> <strike class="product_discount">
+									<span style='color: black'>Rs.[(${#numbers.formatDecimal(product.price,
+										0, 'COMMA', 0, 'POINT')})]/-<span>
+								</strike>
 							</div>
 							<div>
 								<span class="product_saved">You Saved:</span> <span
-									style='color: black'>₹ 2,000<span>
+									style='color: black'>Rs.[(${#numbers.formatDecimal(product.discount/100.0*product.price,
+									0, 'COMMA', 0, 'POINT')})]/-<span>
 							</div>
 							<hr class="singleline">
 
@@ -103,19 +86,117 @@
 							<div class="row">
 
 								<div class="col-xs-6">
-									<button type="button"
+									<button
+										th:unless="${user!=null} and ${user.role == 'ROLE_SELLER' || user.role == 'ROLE_ADMIN'}"
+										th:onclick="addToCart([[${product.id}]], [[${product.name}]], [[${product.getDiscountPrice()}]])"
+										type="button"
 										class="btn primary-background text-white col-8 offset-2 shop-button">Add
 										to Cart</button>
+										
+										<br>
+										<br>
+										<br>
+										<br>
+										<hr>
+										<h4 class="text-center">Reviews</h4>
+
+									<div class="card shadowed-2 mt-3">
+
+										<div class="d-flex flex-column comment-section">
+											<div th:classappend="${#lists.isEmpty(comments) ? 'zero-reviews' : 'vertical-scrollable'}" class="bg-white p-2 vertical-scrollable ">
+											 
+											  <h1  th:if="${#lists.isEmpty(comments)}" class="text-center justify-content-center mt-3">There are not reviews.</h1>
+											 <th:block th:each="comment : ${comments}">
+											 
+											
+											 
+												<div class="d-flex flex-row user-info">
+													<img class="rounded-circle"
+														th:src="'/users_profile/'+${comment.user.profile}" width="40">
+													<div class="d-flex flex-column justify-content-start ml-2">
+														<span class="d-block font-weight-bold name">&nbsp;[(${comment.user.name})]</span><span class="date text-black-50">&nbsp;[(${#dates.format(comment.date, 'dd-MMM-yyyy')})]</span>
+													</div>
+												</div>
+												<div class="mt-2">
+													<p class="comment-text">[(${comment.comment})]</p>
+														
+												</div>
+												
+												<hr>
+												
+												
+												</th:block>
+												
+												
+											</div>
+											
+											
+											
+											
+											
+											
+											
+
+											<form  id="reviewForm" action="/processingComment" method="POST" class="bg-light p-2">
+											
+											<input th:if="${user!=null}" type="hidden" name="user_id" th:value="${user.id}">
+											<input type="hidden" name="product_id" th:value="${product.id}">
+											
+												<div th:if="${user!=null}" class="d-flex flex-row align-items-start">
+													<img class="rounded-circle"
+														 width="40">
+													<textarea id="reviewInput" style="display: none;" name="comment" class="form-control ml-1 shadow-none textarea"></textarea>
+												</div>
+												
+												<div class="mt-2 text-center">
+													<button type="button" id="addReviewButton" onclick="toggleReviewInput()" th:if="${user!=null}" class="btn btn-primary col-lg-6 shadow-none">Add review</button>
+													<button type="button" th:if="${user!=null}" onclick="toggleReviewInput()" class="btn btn-danger col-lg-6  shadow-none" id="cancelButton" style="display:none">Cancel</button>
+												</div>
+												
+												
+												
+												
+												<div class="mt-2 text-right">
+													<button onclick="location.href='/login'" th:unless="${user!=null}" class="btn col-8 offset-2 btn-primary btn-sm shadow-none"
+														type="button">Login to add review.</button>
+												</div>
+												
+											</form>
+										</div>
+
+									</div>
+
 
 								</div>
+
+
+
+
+
 							</div>
 						</div>
 					</div>
+
+
+
 				</div>
 
-			</div>
-		</div>
-	</div>
 
+
+			</div>
+			<div class="container">
+
+				<div class="row row-underline"></div>
+
+				<div class="col col-lg-12 table-responsive">[(${product.description})]</div>
+
+
+
+			</div>
+
+
+
+
+		</div>
 </body>
 </html>

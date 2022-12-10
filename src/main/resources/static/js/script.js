@@ -5,6 +5,8 @@ $(document).ready(function() {
 		selector: '#productdescription'
 	});
 
+
+
 });
 
 
@@ -153,7 +155,7 @@ function updateCart() {
                    <tr>
                    
                    <td>${item.productName}
-                   <input type='hidden' name='product_id' value='${item.productId}'>
+                   <input type='hidden' name='product_ids' value='${item.productId}'>
                    </td>
                    <td><i onclick='incQuantity(${item.productId}, ${item.productQuantity})' class='fa fa-circle-plus text-success'></i> ${item.productQuantity} <i onclick='decQuantity(${item.productId}, ${item.productQuantity})' class='fa fa-circle-minus text-danger'></i>
                    <input type='hidden' name='product_quantities' value='${item.productQuantity}'>
@@ -293,7 +295,41 @@ function checkOut() {
 }
 
 
+function toggleReviewInput() {
+  var reviewInput = document.getElementById("reviewInput");
+  var addReviewButton = document.getElementById("addReviewButton");
+  var cancelButton = document.getElementById("cancelButton");
+  var reviewForm = document.getElementById("reviewForm");
+  if (reviewInput.style.display === "none") {
+    reviewInput.style.display = "block";
+    cancelButton.style.display = "block";
+    // Change the button text to "Post Review" when the textarea is visible
+    addReviewButton.innerText = "Post Review";
+  } else {
+    reviewInput.style.display = "none";
+    cancelButton.style.display = "none";
+    // Change the button text back to "Add Review" when the textarea is hidden
+    addReviewButton.innerText = "Add Review";
+    // Submit the form when the user clicks the "Post Review" button
+  }
 
+  
+  // Check if the reviewForm element exists and has a submit event
+  if (reviewForm && reviewForm.addEventListener && reviewForm.dispatchEvent) {
+    // Add a submit event listener to the reviewForm element
+    reviewForm.addEventListener('submit', (event) => {
+      // Use the event object to prevent the default form submission behavior
+      event.preventDefault();
 
+      // Submit the form manually (if you want to)
+      reviewForm.submit();
+    });
 
+    // Manually trigger the submit event on the reviewForm element when the "Post Review" button is clicked
+    addReviewButton.addEventListener('click', (event) => {
+      reviewForm.dispatchEvent(new Event('submit'));
+    });
+  }
 
+  return false;
+}

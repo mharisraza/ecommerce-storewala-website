@@ -9,8 +9,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.storewala.dao.UserRepository;
+import com.storewala.daos.UserRepository;
 import com.storewala.entities.User;
+
 
 @SpringBootApplication
 @ComponentScan(basePackages = "com.storewala.*")
@@ -30,7 +31,7 @@ public class StoreWalaApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		
 		User user = new User();
-		
+			
 		user.setId(1);
 		user.setEmail("admin@storewala.com");
 		user.setEnable(true);

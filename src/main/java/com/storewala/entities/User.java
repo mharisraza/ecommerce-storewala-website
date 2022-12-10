@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
@@ -49,8 +50,6 @@ public class User {
 	@Column(name = "regisered_date")
 	private Date date;
 	
-	
-
 	public int getId() {
 		return id;
 	}
@@ -124,6 +123,8 @@ public class User {
 	public void setDate(Date date) {
 		this.date = date;
 	}
+	
+	
 
 	@Override
 	public String toString() {
