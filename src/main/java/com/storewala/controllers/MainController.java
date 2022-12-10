@@ -79,8 +79,7 @@ public class MainController {
 		return "index.html";
 	}
 
-	// register page view.
-
+       /* Register page view */
 	@GetMapping("/register")
 	public String registerPage(Model m) {
 
@@ -89,76 +88,93 @@ public class MainController {
 		return "register";
 	}
 
-	// register processing logic.
 
 	@PostMapping("/process-registration")
 	public String doRegister(@Valid @ModelAttribute("user") User user, BindingResult result, RedirectAttributes redir,
-	        @RequestParam("confirm_password") String confirmPassword, @RequestParam("user_role") String role, Model m,
-	        HttpSession httpSession) {
+			@RequestParam("confirm_password") String confirmPassword, @RequestParam("user_role") String role, Model m,
+			HttpSession httpSession) {
 
-	    try {
+		if (result.hasErrors()) {
+			m.addAttribute("user", user);
+			return "register";
+		}
 
-	        // If the user input is not valid, return the user to the registration page.
-	        if (result.hasErrors()) {
-	            m.addAttribute("user", user);
-	            return "register";
-	        }
+		if (role.equals("non-selected")) {
+			m.addAttribute("user", user);
+			httpSession.setAttribute("status", "role-not-select");
+			return "redirect:/register";
+		}
 
-	        // If the user did not select a role, redirect them to the registration page and set a status message.
-	        if (role.equals("non-selected")) {
-	            m.addAttribute("user", user);
-	            httpSession.setAttribute("status", "role-not-select");
-	            return "redirect:/register";
-	        }
+		if (confirmPassword.equals("") || confirmPassword == null) {
+			m.addAttribute("user", user);
+			httpSession.setAttribute("status", "cp-empty");
+			return "redirect:/register";
+		}
 
-	        // If the user did not enter a confirm password, redirect them to the registration page and set a status message.
-	        if (confirmPassword.equals("") || confirmPassword == null) {
-	            m.addAttribute("user", user);
-	            httpSession.setAttribute("status", "cp-empty");
-	            return "redirect:/register";
-	        }
+		if (!user.getPassword().equals(confirmPassword)) {
+			m.addAttribute("user", user);
+			httpSession.setAttribute("status", "cp-not-match");
+			return "redirect:/register";
+		}
 
-	        // If the password and confirm password do not match, redirect the user to the registration page and set a status message.
-	        if (!user.getPassword().equals(confirmPassword)) {
-	            m.addAttribute("user", user);
-	            httpSession.setAttribute("status", "cp-not-match");
-	            return "redirect:/register";
-	        }
+		try {
+			user.setRole(role.equals("customer") ? "ROLE_CUSTOMER" : "ROLE_SELLER");
 
-	        // Set the user's role based on their input.
-	        if (role.equals("customer")) {
-	            user.setRole("ROLE_CUSTOMER");
-	        } else {
-	            user.setRole("ROLE_SELLER");
-	        }
+			user.setEnable(true);
+			user.setProfile("user.png");
+			user.setPassword(passwordEncoder.encode(user.getPassword()));
+			user.setDate(new Date());
 
-	        // Set the user's account to be enabled, set the default profile picture, and encrypt the password.
-	        user.setEnable(true);
-	        user.setProfile("user.png");
-	        user.setPassword(passwordEncoder.encode(user.getPassword()));
-	        user.setDate(new Date());
+			this.userRepo.save(user);
 
-	        // Save the user to the database.
-	        this.userRepo.save(user);
+		} catch (DataIntegrityViolationException e) {
+			httpSession.setAttribute("status", "email-exist");
+			m.addAttribute("user", user);
+			return "redirect:/register";
 
-	    } catch (DataIntegrityViolationException e) {
-	        // If there is a database error, redirect the user to the registration page and set a status message.
-	        httpSession.setAttribute("status", "email-exist");
-	        m.addAttribute("user", user);
-	        return "redirect:/register";
+		} catch (Exception e) {
+			httpSession.setAttribute("status", "went-wrong");
+			e.printStackTrace();
+		}
 
-	    } catch (Exception e) {
-	        // If there is any other error, set a status message and print the stack trace.
-	        httpSession.setAttribute("status", "went-wrong");
-	        e.printStackTrace();
-	    }
-
-	    // Set a success status message and redirect the user to the registration page.
-	    httpSession.setAttribute("status", "registered-success");
-	    return "redirect:/register";
+		httpSession.setAttribute("status", "registered-success");
+		return "redirect:/register";
 	}
 
-	// login view [Logic already done by Spring Security internally]
+	/*
+	 * EXPLANATION OF REGISTER METHOD
+	 * 
+	 * This function is a method that handles a POST request to the
+	 * "/process-registration" URL. It is used to register a new user in the
+	 * application.
+	 * 
+	 * If the user input is not valid, return the user to the registration page.
+	 * 
+	 * If the user did not select a role, redirect them to the registration page and
+	 * set a status message.
+	 * 
+	 * If the user did not enter a confirm password, redirect them to the
+	 * registration page and set a status message.
+	 * 
+	 * If the password and confirm password do not match, redirect the user to the
+	 * registration page and set a status message.
+	 * 
+	 * Set the user's role based on their input.
+	 * 
+	 * Set the user's account to be enabled, set the default profile picture, and
+	 * encrypt the password.
+	 * 
+	 * Save the user to the database.
+	 * 
+	 * If there is a database error, redirect the user to the registration page and
+	 * set a status message.
+	 * 
+	 * If there is any other error, set a status message and print the stack trace.
+	 * 
+	 * Set a success status message and redirect the user to the registration page.
+	 * 
+	 */
+
 
 	@GetMapping("/login")
 	public String loginPage(Model m) {
@@ -185,7 +201,13 @@ public class MainController {
 		return "login";
 	}
 
-	// search view + logic.
+	/*
+	 * The above function is a method that handles requests to the /login URL. If
+	 * the user is logged in, the function redirects them to a different URL
+	 * depending on their role (e.g. /customer/home, /admin/home, or /seller/home).
+	 * If the user is not logged in, the function adds an attribute to the Model
+	 * object and returns a view that will likely render a login page for the user.
+	 */
 
 	@GetMapping("/search")
 	public String searchProducts(@RequestParam(value = "category", required = false) Integer categoryType,
@@ -194,7 +216,12 @@ public class MainController {
 		return "search_product";
 	}
 
-	// unban request view
+	/*
+	 *                         EXPLANATION OF SEARCH METHOD
+	 *                         
+	 *  the above function is a method that handles request to the /search URL.
+	 *  it displays all of the products related to the query and category.
+	 */
 
 	@GetMapping("/unban-request")
 	public String unbanRequestView(Model m) {
@@ -236,6 +263,26 @@ public class MainController {
 
 		return "redirect:/unban-request";
 	}
+	
+	
+	/*            EXPLANATION OF PROCESS UNBAN REQUEST METHOD
+	  This function is a controller method that handles a POST request to the "/processing-unban-request" URL.
+	  It is used to submit an unban request for a suspended user in the application.
+
+	  If the user input is not valid, return the user to the unban request page.
+
+	  Check if the user exists in the database. If they do not exist, set a status message
+	  and redirect the user to the unban request page.
+
+	  Check if the user is suspended. If they are not suspended, set a status message
+	  and redirect the user to the unban request page.
+
+	  Save the unban request to the database.
+
+	  If the unban request was saved successfully, set a status message to indicate success.
+
+	  Redirect the user to the unban request page.
+	*/
 
 	@GetMapping("/profile")
 	public String showProfile(Model m, Principal principal, HttpSession httpSession) {
@@ -259,7 +306,7 @@ public class MainController {
 			httpSession.setAttribute("status", "not-login");
 			return "redirect:/home";
 		}
-		
+
 		int pinCode = new Random().nextInt(999999);
 
 		User user = this.userRepo.loadUserByUserName(principal.getName());
@@ -275,11 +322,12 @@ public class MainController {
 		m.addAttribute("title", "Checkout | StoreWala");
 		return "checkout";
 	}
+	
 
 	@GetMapping("/showProduct")
 	public String productDetail(@RequestParam(name = "product_id", required = false) Integer id, Model m,
 			Principal principal) {
-		
+
 		List<Comment> comments = this.commentRepo.getAllComments(id);
 
 		if (principal != null) {
@@ -294,33 +342,59 @@ public class MainController {
 		return "show_product";
 	}
 	
+
 	@PostMapping("/processingComment")
-	public String processComment(HttpSession httpSession, @RequestParam(value = "comment", required = false) String comment,
-			@RequestParam(name = "user_id", required = false) Integer userId, @RequestParam(value = "product_id", required = false) Integer productId) {
-		
+	public String processComment(HttpSession httpSession,
+			@RequestParam(value = "comment", required = false) String comment,
+			@RequestParam(name = "user_id", required = false) Integer userId,
+			@RequestParam(value = "product_id", required = false) Integer productId) {
+
 		User user = this.userRepo.getById(userId);
-		
+
 		boolean flag = false;
-		
+
 		Comment cmnt = new Comment();
-		
+
 		cmnt.setComment(comment);
 		cmnt.setCommentRelatedTo(productId);
 		cmnt.setUser(user);
 		cmnt.setDate(new Date());
-		
+
 		this.commentRepo.save(cmnt);
 		flag = true;
-		
-		if(flag) {
+
+		if (flag) {
 			httpSession.setAttribute("status", "commented-successfully");
-			return "redirect:/showProduct?product_id="+productId;
+			return "redirect:/showProduct?product_id=" + productId;
 		}
-		
+
 		httpSession.setAttribute("status", "went-wrong");
-		return "redirect:/showProduct?product_id="+productId;
+		return "redirect:/showProduct?product_id=" + productId;
 	}
-	
+
+	/*
+	 * Explanation of process comment method
+	 * 
+	 * This above method is a method that handles requests to process a comment on a
+	 * product. It has several parameters, including the current HTTP session, the
+	 * comment text, the ID of the user who submitted the comment, and the ID of the
+	 * product the comment is related to.
+	 * 
+	 * The method first retrieves the user object from the database using the
+	 * provided user ID, and then creates a new Comment object with the provided
+	 * comment text, product ID, user, and current date. The method then saves the
+	 * comment to the database and sets a flag to indicate that the comment was
+	 * saved successfully.
+	 * 
+	 * If the flag is set, the method sets an attribute in the HTTP session,
+	 * redirects the user to the page for the product with the provided product ID,
+	 * and appends a query parameter to the URL indicating that the comment was
+	 * submitted successfully. Otherwise, the method sets an attribute in the HTTP
+	 * session and redirects the user to the same page, but without the query
+	 * parameter.
+	 * 
+	 */
+
 	@GetMapping("/MyOrders")
 	public String orderStatus() {
 		return "order_status.html";
