@@ -28,6 +28,7 @@ The project includes the following modules:
 - `unban-request`: This module allows users to request to unban their account if it has been suspended by the administrator.
 - `review-section`: This module allows users to leave reviews for products on the product detail page.
 - `product-detailed-page`: This module provides a detailed view of a product, including its description, price, and reviews.
+- `order-module`: Dropped.
 
 ## Installation
 
