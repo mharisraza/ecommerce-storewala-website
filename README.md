@@ -1,5 +1,9 @@
 # StoreWala
 
+![image](https://user-images.githubusercontent.com/111365348/208684870-007e52bb-9c3f-421b-818d-8bc95a3cc6f4.png)
+![image](https://user-images.githubusercontent.com/111365348/208684972-9c707143-924a-4c13-a3e4-4bee528b2040.png)
+
+
 StoreWala is an e-commerce website that allows users to browse and purchase products online. It is built using the following technologies:
 
 - Spring Boot
