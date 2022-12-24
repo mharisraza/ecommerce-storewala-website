@@ -1,8 +1,0 @@
-{
-   "build": {
-      "type": "maven",
-      "goal": "package"
-   },
-   "deploy": {
-     "jarName": "clevercloud/storewala.jar"
-}
