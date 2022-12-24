@@ -47,3 +47,8 @@ Once the application is running, you can access the website at http://localhost:
 
 - Email: `admin@storewala.com`
 - Password: `admin`
+
+## Live View:
+
+go to: `https://ecommerce-sb.hariss.ga/`
+You can register/login there.
